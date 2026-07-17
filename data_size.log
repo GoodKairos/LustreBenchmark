@@ -1,0 +1,24 @@
+65:
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           152G  2.2M  152G   1% /run
+efivarfs        128K   58K   66K  48% /sys/firmware/efi/efivars
+/dev/nvme0n1p2  879G   42G  793G   5% /
+tmpfs           756G     0  756G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/nvme0n1p1  1.1G  6.2M  1.1G   1% /boot/efi
+ost00pool/ost0   14T   14T  394G  98% /lustre_test/ost0
+tmpfs           152G   16K  152G   1% /run/user/0
+
+
+169
+
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           152G  2.1M  152G   1% /run
+efivarfs        128K   58K   66K  47% /sys/firmware/efi/efivars
+/dev/nvme0n1p2  879G   43G  791G   6% /
+tmpfs           756G     0  756G   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/nvme0n1p1  1.1G  6.2M  1.1G   1% /boot/efi
+ost01pool/ost1   14T   14T  395G  98% /lustre_test/ost1
+tmpfs           152G   16K  152G   1% /run/user/0
+
