@@ -1,0 +1,27 @@
+64
+zpool create -f -O canmount=off -o cachefile=none mgspool /dev/nvme1n1p1
+zpool create -f -O canmount=off -o cachefile=none mdt01pool /dev/nvme2n1
+mkfs.lustre --mgs --reformat --fsname=lustrefs --backfstype=zfs mgspool/mgs /lustre_test/mgs
+mkfs.lustre --mgsnode=10.10.44.64@o2ib0 --mdt --reformat --fsname=lustrefs --index=0 --backfstype=zfs mdt01pool/mdt1 /lustre_test/mdt1
+mount -t lustre mgspool/mgs /lustre_test/mgs
+mount -t lustre mdt01pool/mdt1 /lustre_test/mdt1
+
+65&169
+parted -s /dev/nvme1n1 mklabel gpt
+parted -s /dev/nvme1n1 mkpart primary 1MiB 512GiB
+parted -s /dev/nvme1n1 mkpart primary 512GiB 100%
+partprobe /dev/nvme1n1
+
+65
+zpool create -f -O canmount=off -o cachefile=none ost00pool /dev/nvme2n1 log /dev/nvme1n1p1 special /dev/nvme1n1p2
+mkfs.lustre --mgsnode=10.10.44.64@o2ib0 --ost --reformat --fsname=lustrefs --index=1 --backfstype=zfs ost00pool/ost0 /lustre_test/ost0
+mount -t lustre ost00pool/ost0 /lustre_test/ost0
+
+169
+zpool create -f -O canmount=off -o cachefile=none ost01pool /dev/nvme2n1 log /dev/nvme1n1p1 special /dev/nvme1n1p2
+mkfs.lustre --mgsnode=10.10.44.64@o2ib0 --ost --reformat --fsname=lustrefs --index=2 --backfstype=zfs ost01pool/ost1 /lustre_test/ost1
+mount -t lustre ost01pool/ost1 /lustre_test/ost1
+
+40
+mount -t lustre 10.10.44.64@o2ib:/lustrefs /mnt/lustref
+
