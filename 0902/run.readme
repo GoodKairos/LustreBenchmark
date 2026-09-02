@@ -1,0 +1,25 @@
+1. Client中启动两个窗口，都启动虚拟环境
+root@dskna004:/home/smrc/biao.xing/FIO-main/lmcache# python3 -m venv venv
+root@dskna004:/home/smrc/biao.xing/FIO-main/lmcache# source venv/bin/activate
+
+2. Client中运行lmbench server
+在Client中的一个窗口，进入到目录/home/smrc/biao.xing/FIO-main/lmcache中，运行lmbench的server
+(venv) root@dskna004:/home/smrc/biao.xing/FIO-main/lmcache# bash ./vllm_server.sh
+
+3. OST中清除cache
+root@dsksa305:/home/smrc/biao.xing# sync && echo 3 > /proc/sys/vm/drop_caches
+ 
+4. OST中运行blktrace和waf extract
+a. 运行blktrace 和提取日志的脚本
+进入目录/home/smrc/biao.xing，运行blktrace, root@dsksa305:/home/smrc/biao.xing# blktrace -d /dev/nvme1n1 -o ./blk_trace/nvme1n1_trace
+b. 运行提取日志的脚本
+进入目录/home/smrc/biao.xing/blk_trace，运行脚本blk_data.sh， root@dsksa348:/home/smrc/biao.xing/blk_trace# bash blk_data.sh nvme1n1_trace
+c. 运行waf extract
+进入目录/home/smrc/biao.xing/waf_evl，运行脚本waf_nvme.sh，root@dsksa305:/home/smrc/biao.xing/waf_evl# ./waf_nvme.sh 5s nvme1n1 > waf.log
+
+
+5. Client中进入到目录/home/smrc/biao.xing/lmcache_ws/LMBenchmark/synthetic-multi-round-qa中，运行lmbench的client
+python3 "./multi-round-qa.py"   --num-users 15   --num-rounds 2   --qps 8   --shared-system-prompt 1000   --user-history-prompt 20000   --answer-len 100   --model "/home/smrc/biao.xing/FIO-main/Llama-3.1-8B-Instruct/"   --base-url http://localhost:6701/v1   --init-user-id 1   --output ./output/qps8.csv   --log-interval 30   --time 7200
+
+备注：清除blktrace的日志
+root@dsksa348:/home/smrc/biao.xing# rm -rf blk_trace/nvme1n1_trace.blktrace.* blk_trace/blk_raw_data blk_trace/iostat_nvme1n1_trace.log blk_trace/time.log

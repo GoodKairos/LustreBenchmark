@@ -1,0 +1,38 @@
+MDT:
+zpool create -f -O canmount=off -o cachefile=none mgspool /dev/nvme1n1p1
+zpool create -f -O canmount=off -o cachefile=none mdt01pool /dev/nvme1n1p2
+mkfs.lustre --mgs --reformat --fsname=lustrefs --backfstype=zfs mgspool/mgs /lustre_test/mgs
+mkfs.lustre --mgsnode=10.10.44.64@o2ib0 --mdt --reformat --fsname=lustrefs --index=0 --backfstype=zfs mdt01pool/mdt1 /lustre_test/mdt1
+mount -t lustre mgspool/mgs /lustre_test/mgs
+mount -t lustre mdt01pool/mdt1 /lustre_test/mdt1
+
+
+OST0
+zpool create -f -O canmount=off -o cachefile=none ost00pool /dev/nvme1n1
+mkfs.lustre --mgsnode=10.10.44.64@o2ib0 --ost --reformat --fsname=lustrefs --index=1 --backfstype=zfs ost00pool/ost0 /lustre_test/ost0
+mount -t lustre ost00pool/ost0 /lustre_test/ost0
+
+
+OST1
+zpool create -f -O canmount=off -o cachefile=none ost01pool /dev/nvme1n1
+mkfs.lustre --mgsnode=10.10.44.64@o2ib0 --ost --reformat --fsname=lustrefs --index=2 --backfstype=zfs ost01pool/ost1 /lustre_test/ost1
+mount -t lustre ost01pool/ost1 /lustre_test/ost1
+
+
+client:
+root@dskna004:~# mount -t lustre 10.10.44.64@o2ib:/lustrefs /mnt/lustref
+
+
+root@dsksa348:~# zpool list -H -o frag
+0%
+
+zpool trim ost00pool
+
+zpool set autotrim=on ost00pool
+
+server
+lctl get_param obdfilter.lustrefs-OST0001.brw_size
+client
+lctl get_param osc.*.max_pages_per_rpc
+
+pgrep -f VLLM::Worker_* | xargs -r kill -9
