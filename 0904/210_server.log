@@ -1,0 +1,5 @@
+[rank1]:[W903 23:06:23.600751803 CUDAGuardImpl.h:123] Warning: CUDA warning: out of memory (function destroyEvent)
+[rank3]:[W903 23:06:23.659087100 CUDAGuardImpl.h:123] Warning: CUDA warning: out of memory (function destroyEvent)
+(APIServer pid=2090246) INFO 09-03 23:06:30 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.5 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 4.8%, External prefix cache hit rate: 0.0%
+(APIServer pid=2090246) INFO 09-03 23:06:40 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 4.8%, External prefix cache hit rate: 0.0%
+

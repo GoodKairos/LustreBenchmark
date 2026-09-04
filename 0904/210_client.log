@@ -1,0 +1,10 @@
+WARNING:__main__:User 15072 has an unfinished request and unable to fit the QPS requirement.
+^[[33;20m[2026-09-04 01:11:39,787] WARNING:^[[0m User 15073 has an unfinished request and unable to fit the QPS requirement. ^[[3m(multi-round-qa.py:414:__main__)^[[0m
+WARNING:__main__:User 15073 has an unfinished request and unable to fit the QPS requirement.
+^[[33;20m[2026-09-04 01:11:39,787] WARNING:^[[0m User 15074 has an unfinished request and unable to fit the QPS requirement. ^[[3m(multi-round-qa.py:414:__main__)^[[0m
+WARNING:__main__:User 15074 has an unfinished request and unable to fit the QPS requirement.
+DEBUG:__main__:User 15099 issues request 1
+^[[32;20m[2026-09-04 01:11:39,908] INFO:^[[0m Waiting for remaining tasks to finish ^[[3m(utils.py:105:AsyncLoopWrapper)^[[0m
+INFO:AsyncLoopWrapper:Waiting for remaining tasks to finish
+DEBUG:__main__:User 73 finished one request. Prompt tokens: 21045, generation tokens: 100
+
