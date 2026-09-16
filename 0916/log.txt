@@ -1,0 +1,4 @@
+2026-09-16 11:51:26.988 - record_processor_4bfc334a - ERROR - Failed to handle command profile_configure with hook @on_command 🡒 RecordProcessor._profile_configure_command: Failed to load tokenizer '/opt/datasets/models/Llama-3.1-8B-Instruct': HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/opt/datasets/models/Llama-3.1-8B-Instruct'. Use `repo_type` argument if needed.
+2026-09-16 11:51:26.990 - system_controller - ERROR - Error running Hook(func=<bound method SystemController._start_services of <SystemController system_controller (state=starting)>>, params=None) hook for SystemController: Failed to perform operation 'Configure Profiling'
+2026-09-16 11:51:26.990 - system_controller - ERROR - Failed for SystemController (id=system_controller): SystemController._start_services: Failed to perform operation 'Configure Profiling'
+
